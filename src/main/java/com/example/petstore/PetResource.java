@@ -75,6 +75,28 @@ public class PetResource {
 	}
 
 	@APIResponses(value = {
+			@APIResponse(responseCode = "200", description = "Pet for name", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
+			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
+	@GET
+	@Path("/{petName}")
+	public Response getPetbyName(@PathParam("petName") String petName) {
+
+		Pet pet = new Pet();
+
+		for (Pet value : pets) {
+			if (petName.equals(value.getPetName())) {
+				pet.setPetId(value.getPetId());
+				pet.setPetAge(value.getPetAge());
+				pet.setPetName(value.getPetName());
+				pet.setPetType(value.getPetType());
+			}
+		}
+
+		return Response.ok(pet).build();
+
+	}
+
+	@APIResponses(value = {
 			@APIResponse(responseCode = "200", description = "Create Pets", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))) })
 	@POST
 	@Path("/")

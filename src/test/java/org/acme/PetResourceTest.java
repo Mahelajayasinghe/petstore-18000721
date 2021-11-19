@@ -29,4 +29,25 @@ public class PetResourceTest {
 //    		 );
     }
 
+    @Test
+    public void testGetPetEndpoint() {
+        given()
+                .when().get("/v1/pets/2")
+                .then()
+                .statusCode(200);
+             //.body("petId", is(2));
+    }
+
+//    @Test
+//    public void testPostPetEndpoint() {
+//        given()
+//                .when().post("/v1/pets/")
+//                .then()
+//                .statusCode(200)
+//                .body("petName", is("Panda"))
+//                .body("petType", is("Dog"))
+//                .body("petAge", is(10))
+//        ;
+//    }
+
 }
